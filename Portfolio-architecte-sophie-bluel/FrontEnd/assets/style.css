@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
@@ -86,8 +87,9 @@ h2{
 }
 nav ul {
 	display: flex;
-	align-items: center;
+	/*align-items: flex-end; */
 	list-style-type: none;
+	align-items: center;
 
 }
 nav li {
@@ -95,7 +97,7 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+li:hover, a:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -137,15 +139,15 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
+#contact  {
 	width: 50%;
 margin: auto;
 }
-#contact > * {
+#contact  > * {
 	text-align: center;
 
 }
-#contact h2{
+#contact  h2{
 	margin-bottom: 20px;
 }
 #contact form {
@@ -155,16 +157,16 @@ margin: auto;
 	flex-direction: column;
 }
 
-#contact input {
+#contact  input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact  label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+#contact  textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -186,3 +188,79 @@ footer nav ul {
 	margin: 2em
 }
 
+#login form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login  label {
+	margin: 2em 0 1em 0;
+}
+
+#login  input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#login  > * {
+	text-align: center;
+
+}
+
+#login  {
+	width: 50%;
+margin: auto;
+}
+
+#login p {
+	text-decoration : underline;
+}
+
+.selectPage {
+	font-family: 'Work Sans';
+	font-weight: 600;
+	font-size: 16px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+.formatInsta {
+	width: 20px;
+	height: 20px;
+	align-self: center;
+}
+
+.filtres {
+	
+	display : flex ;
+	justify-content: center;
+	margin-right: 20px;
+}
+
+.btn-tous, .btn-Objets, .btn-appartement, .btn-hoteletrestaurants{
+	margin-right: 10px;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+button {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	color: #1D6154;
+	border :1.3px solid  #1D6154;
+	border-radius : 30px;
+	background-color: #FFFEF8;
+	padding: 10px;
+}
+
+button:active {
+	background-color: #1D6154;
+	color :#FFFEF8;
+}

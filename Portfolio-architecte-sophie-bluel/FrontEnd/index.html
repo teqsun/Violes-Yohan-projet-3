@@ -9,16 +9,17 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li><a href="login.html">login</a></li>
+			<li><img src="./assets/icons/instagram.png" alt="Instagram"  class="formatInsta"></li>
 		</ul>
 	</nav>
 </header>
@@ -36,8 +37,21 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
-		<div class="gallery">
-			<figure>
+			<section class="filtres">
+				<button class="btn-tous">Tous</button>
+				<br>
+				<button class="btn-Objets">Objets</button>
+				<br>
+				<button class="btn-appartement">Appartements</button>
+				<br>
+				<button class="btn-hoteletrestaurants">Hôtels & restaurants</button>
+				<br>
+			</section>
+		<section class="gallery">
+			<!--<p><span id="title"></span></p>
+			
+			<p><span id="img"></span></p>-->
+			<!--<figure>
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
 				<figcaption>Abajour Tahina</figcaption>
 			</figure>
@@ -79,9 +93,9 @@
 			</figure>
 			<figure>
 				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
-		</div>
+				<figcaption>Hotel First Arte - New Delhi</figcaption> 
+			</figure>-->
+		</section>
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>
@@ -105,5 +119,7 @@
 		</ul>
 	</nav>
 </footer>
+
+<script type="module" src="works.js"></script>
 </body>
 </html>
