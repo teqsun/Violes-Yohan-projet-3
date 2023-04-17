@@ -1,160 +1,459 @@
-/*
-const dataApi = fetch('http://localhost:5678/api/works');
 
 
-dataApi
-.then(async (responseData) => {
-    //console.log(responseData);
-
-    const response = await responseData.json();
-    console.log(response[11]);
+const allWorks = new Set()
+const allCategory = new Set()
+let image = ""
 
 
-try {
-const title = response[0].title;
-const imageUrl = response[0].imageUrl;
+// fonction qui permet de récupérer tous les projets sur l'api
+async function getAllWork() {
+    // la reponse de l'api stock les données venant de l'api
+    const response = await fetch('http://localhost:5678/api/works');
+    if (response.ok) {
+        // si la réponse est bonne, les fichiers sont transformés au format json
+        return response.json()
+        //sinon la console nous indique une autre réponse
+    } else {
+        console.log(response);
+    }
+}
 
-const affichage_Title = document.querySelector("#title");
-affichage_Title.innerHTML = title;
-
-const imageElement = document.querySelector("#img");
-const imageImageUrl = `<img src="${imageUrl}">`;
-
-imageElement.insertAdjacentHTML("afterbegin", imageImageUrl); 
+async function init() {
+    const works = await getAllWork()
+    for (const work of works) {
+        allWorks.add(work)
+    }
+    genererWorks(allWorks)
+    genererWorksModal(allWorks)
+    const cats = await getAllCategory()
+    for (const cat of cats) {
+        allCategory.add(cat)
+    }
+    genererCategory(cats)
 
 }
-catch(err) {
-    console.log(err);
+init()
+
+//on créé une une fonction asyncrone pour générer les projets actuels
+async function genererWorks(works) {
+    // on crée la zone d'apparitions dans la section gallery
+    const sectionFiches = document.querySelector(".gallery");
+    sectionFiches.innerHTML = ""
+    // on fragmente la formation du document dans la section gallery
+    const fragment = document.createDocumentFragment()
+    //on créé la constante work des works pour ensuite l'appeler
+    for (const work of works) {
+        //On nomme l'élément qui va recevoir les instructions des projets
+        const worksElement = document.createElement("figure");
+        //on appel l'userId pour appliquer a chaque travaux leurs Id et donc les reconnaitres
+        worksElement.id = "figure-" + work.id;
+        //on donne la forme des éléments créés
+        worksElement.innerHTML = `<img src="${work.imageUrl}" alt="${work.title}">
+        <figcaption>${work.title}</figcaption>`;
+        //on attache la constante fragment a son parent
+        fragment.appendChild(worksElement);
+
+    }
+    //Permet d'appliquer la création des figures des projets apres avoir récupérer toutes les données des projets par la fragmentation obtenu
+    sectionFiches.appendChild(fragment)
 }
+
+async function getAllCategory() {
+    // la reponse de l'api stock les données venant de l'api
+    const response = await fetch('http://localhost:5678/api/categories');
+    if (response.ok) {
+        // si la réponse est bonne, les fichiers sont transformés au format json
+        return response.json()
+        //sinon la console nous indique une autre réponse
+    } else {
+        console.log(response);
+    }
+}
+
+//on créé une une fonction asyncrone pour générer les projets actuels
+async function genererCategory(categories) {
+    // on crée la zone d'apparitions dans la section gallery
+    const sectionCategory = document.querySelector(".filtres");
+    // on fragmente la formation du document dans la section gallery
+    const fragment = document.createDocumentFragment()
+    //on créé la constante work des works pour ensuite l'appeler
+    for (const category of categories) {
+        //On nomme l'élément qui va recevoir les instructions des projets
+        const worksCategory = document.createElement("div");
+        //on appel l'userId pour appliquer a chaque travaux leurs Id et donc les reconnaitres
+        worksCategory.dataset = category;
+        //on donne la forme des éléments créés
+        worksCategory.innerHTML =
+            `<button class="btn-filtres" data-type="${category.id}">${category.name}</button>`
+        //on attache la constante fragment a son parent
+        fragment.appendChild(worksCategory);
+
+    }
+    //Permet d'appliquer la création des figures des projets apres avoir récupérer toutes les données des projets par la fragmentation obtenu
+    sectionCategory.appendChild(fragment)
+    //une fois le code éxécuter on appel la function de filtre des boutons pour appliquer les filtres actif selectionnés
+    filterBtn()
+}
+
+//création de la fonction des boutons filtres
+async function filterBtn() {
+    //on créé la constante pour pouvoir l'appeler, on désigne les boutons avec la meme classe
+    const buttonsFilter = document.querySelectorAll(".btn-filtres");
+    //on récupere les données de la fonction getallworks pour récupérer les projets avant de continuer a éxécuter le code suivant
+    //on ajoute une condition qui s'applique sur des boutons spécifiques
+    for (const buttonFilter of buttonsFilter) {
+
+        //on donne au bouton actif actuel un event sur le clique
+        buttonFilter.addEventListener("click", function (e) {
+            console.log(allWorks);
+            //on crée la constante qui désigne le bouton cliqué
+            const clickedBtn = e.target
+            //on récupérer les Id communs affilié au bouton cliqué
+            const type = parseInt(clickedBtn.dataset.type)
+            //on indique que si aucun type de projet est selectionné, tous les projets apparaitronts
+            if (type == 0) {
+                genererWorks(allWorks);
+                // on indique une condition si un type est actif
+            } else {
+                //On applique un filtre sur les projets
+                const filtredWorks = [...allWorks].filter(function (works) {
+                    //on demande de retourner les projets qui remplissent la condition du type demander
+                    return works.category.id == type;
+                });
+                //on appel alors les projets filtré et donc de les faire apparaitre
+                genererWorks(filtredWorks);
+
+            }
+            document.querySelector(".active").classList.remove("active")
+            e.target.classList.add("active")
+        });
+    }
+}
+
+
+const tokenId = localStorage.getItem('token')
+
+
+let filtresDisplay = document.querySelector(".filtres")
+let filtresDisplayLogIn = document.querySelector(".log-in")
+let filtresDisplayLogOut = document.querySelector(".log-out")
+let filtresDisplayModif = document.querySelector(".modif-btn")
+let filtresDisplayModif1 = document.querySelector(".modif-btn1")
+let filtresDisplayModif2 = document.querySelector(".modif-btn2")
+let filtresDisplayblocEdition = document.querySelector(".bloc-edition")
+
+
+
+
+if (tokenId !== null) {
+
+    filtresDisplay.style.display = "none";
+    filtresDisplayLogIn.style.display = "none";
+    filtresDisplayLogOut.style.display = "block";
+    filtresDisplayModif.style.display = "block";
+    filtresDisplayModif1.style.display = "block";
+    filtresDisplayModif2.style.display = "block";
+    filtresDisplayblocEdition.style.display = "flex";
+}
+
+const logOut = document.querySelector(".log-out")
+logOut.addEventListener('click', function () {
+
+    localStorage.removeItem('token')
+
 })
-*/
+
+async function genererWorksModal(worksModale) {
+
+    // on crée la zone d'apparitions dans la section gallery
+    const sectionFichesMin = document.querySelector(".galerie-pictures");
+    sectionFichesMin.innerHTML = ""
+    // on fragmente la formation du document dans la section gallery
+    const fragment = document.createDocumentFragment()
+    //on créé la constante work des works pour ensuite l'appeler
+    for (const workModale of worksModale) {
+        //On nomme l'élément qui va recevoir les instructions des projets
+        const worksElementMin = document.createElement("figure");
+        //on appel l'userId pour appliquer a chaque travaux leurs Id et donc les reconnaitres
+        worksElementMin.dataset.id = workModale.id;
+        //on donne la forme des éléments créés
+        worksElementMin.innerHTML = `<div  class="fig-size">
+										<img src="${workModale.imageUrl}" alt="${workModale.title}" class="img-format" >
+										<i class="fa-regular fa-trash-can icone-in-picture delete-btn"></i>
+										<i class="fa-solid fa-arrows-up-down-left-right icone-in-picture-arrow" > </i>
+									</div>	
+
+									<p>éditer</p>`;
 
 
-const reponse = await fetch('http://localhost:5678/api/works');
-const works = await reponse.json();
-
-for (let i = 0; i< works.length; i++){
 
 
-const article = works[i];
 
-const worksElement = document.createElement("article");
+        //on attache la constante fragment a son parent
+        fragment.appendChild(worksElementMin);
 
-const imageUrlElement = document.createElement("img");
-imageUrlElement.src = article.imageUrl;
-
-const titleElement = document.createElement("p");
-titleElement.innerText = article.title;
-
-const categoryIdElement = document.createElement("null");
-categoryIdElement.innerHTML = article.categoryId;
-       
-const categoryElement = document.createElement("null");
-categoryElement.innerHTML = article.category ;
-       
-const userIdElement = document.createElement("userId");
-userIdElement.innerHTML = article.userId ;
-      
-const nameElement = document.createElement('name');
-nameElement.innerHTML = article.name ;
-
-const sectionFiches = document.querySelector(".gallery");
-
-
-    sectionFiches.appendChild(worksElement);
-    worksElement.appendChild(imageUrlElement);
-    worksElement.appendChild(titleElement);
-//    worksElement.appendChild(categoryIdElement);
-//    worksElement.appendChild(categoryElement);
-//    worksElement.appendChild(userIdElement);
-//    worksElement.appendChild(nameElement);
-
-}
-/*
-
- let works = window.localStorage.getItem('works');
-
- if (works === null) {
-    // Récupération des pièces depuis l'API
-    const reponse = await fetch('works.json');
-    works = await reponse.json();
-    // Transformation des pièces en JSON
-    const valeurWorks = JSON.stringify(works);
-    // Stockage des informations dans le localStorage
-    window.localStorage.setItem("works", valeurWorks);
-} else {
-    works = JSON.parse(works);
-}
-// on appel la fonction pour ajouter le listener au formulaire
-
-
- function genererWorks(works) {
-    for (let i = 0; i < works.length; i++) {
-
-        const article = works[i];
-        // Récupération de l'élément du DOM qui accueillera les fiches
-        const sectionFiches = document.querySelector(".gallery");
-        // Création d’une balise dédiée à une pièce automobile
-        const worksElement = document.createElement("article");
-        worksElement.dataset.id = works[i].id
-        // Création des balises 
-        const imageUrlElement = document.createElement("img");
-        imageUrlElement.src = article.imageUrl;
-
-        const titleElement = document.createElement("h2");
-        titleElement.innerText = article.title;
-
-        const categoryIdElement = document.createElement("p");
-        categoryIdElement.innerText = article.categoryId;
-       
-        const categoryElement = document.createElement("p");
-        categoryElement.innerText = article.category ;
-       
-        const userIdElement = document.createElement("p");
-        userIdElement.innerText = article.userId ;
-      
-        const nameElement = document.createElement("p");
-        nameElement.innerText = article.name ;
-      
-        //Code ajouté
-        const avisBouton = document.createElement("button");
-        avisBouton.dataset.id = article.id;
-        avisBouton.textContent = "Afficher les avis";
-
-        // On rattache la balise article a la section Fiches
-        sectionFiches.appendChild(worksElement);
-        sectionFiches.appendChild(imageUrlElement);
-        sectionFiches.appendChild(titleElement);
-        sectionFiches.appendChild(categoryIdElement);
-        sectionFiches.appendChild(categoryElement);
-        sectionFiches.appendChild(userIdElement);
-        sectionFiches.appendChild(nameElement);
-        //Code aJouté
-        worksElement.appendChild(avisBouton);
 
     }
-} 
+    //Permet d'appliquer la création des figures des projets apres avoir récupérer toutes les données des projets par la fragmentation obtenu
+    sectionFichesMin.appendChild(fragment)
+
+    deleteWorks()
+}
 
 
-genererWorks(works);
 
-for (let i = 0; i < works.length; i++) {
-    const id = works[i].id;
-    const avisJSON = window.localStorage.getItem(`avis-works-${id}`);
-    const avis = JSON.parse(avisJSON);
 
-    if (avis !== null) {
-        const worksElement = document.querySelector(`article[data-id="${id}"]`);
-        afficherAvis(worksElement, avis)
+
+const activeBtnsPictures = document.querySelectorAll("figure");
+activeBtnsPictures.forEach(figure => {
+
+    figure.addEventListener("click", function () {
+
+        activeBtns.forEach(figures => figures.classList.remove("fa-arrows-up-down-left-right"));
+        this.classList.add("fa-arrows-up-down-left-right");
+
+    });
+
+
+});
+
+
+//incorporer la modal 
+
+
+// fonction pour retirer l'image en preview, avant validation
+function cleanPreview() {
+    image = ""
+    document.getElementById("file").value = "";
+
+    const removeCuImg = document.querySelector(".miniature-add-pic")
+    const btnDeleteImg = document.querySelector(".delete-img")
+    const previewMin = document.querySelector(".miniature-add-pic")
+    const blocDisplay = document.querySelector(".flex-bloc-pic")
+    const btnValider = document.querySelector(".btn-valider-photo")
+
+
+    removeCuImg.src = "";
+    previewMin.style.display = "none";
+    blocDisplay.style.display = "flex";
+    btnValider.style.backgroundColor = " #A7A7A7 "
+    btnDeleteImg.style.display = "none"
+}
+
+// fonction pour inporter l'image du bouton add +
+async function previewImage() {
+    let fileCu = document.getElementById("file").files;
+    if (fileCu.length > 0) {
+        let fileCuReader = new FileReader();
+        fileCuReader.onload = function (event) {
+
+
+            const fileSize = fileCu[0].size / (1024 * 1024);
+
+
+            console.log(fileSize)
+            if (fileSize <= 4) {
+                image = fileCu[0]
+                document.getElementById("miniature-add-pic").setAttribute("src", event.target.result);
+                updatePreview()
+
+            } else {
+                cleanPreview()
+                alert('fichier trop lourd')
+
+            }
+        };
+        fileCuReader.readAsDataURL(fileCu[0])
     }
 }
-*/
-/*
- fetch('http://localhost:5678/api/works')
-    .then(data => data.json())
-    .then(jsonListWorks => {
-        console.log(jsonListWorks);
 
-        
 
-    }); */
+
+function updatePreview() {
+    const previewMin = document.querySelector(".miniature-add-pic")
+    const blocDisplay = document.querySelector(".flex-bloc-pic")
+    const btnValider = document.querySelector(".btn-valider-photo")
+    const btnDeleteImg = document.querySelector(".delete-img")
+    if (previewMin.src != "") {
+        previewMin.style.display = "block";
+        blocDisplay.style.display = "none";
+        btnValider.style.backgroundColor = " #1D6154 "
+        btnDeleteImg.style.display = "block"
+    }
+}
+
+
+
+async function deleteWorks() {
+
+
+    // DELETE request using fetch with async/await
+    let btnsDelete = document.querySelectorAll(".delete-btn")
+
+    for (const btnDelete of btnsDelete) {
+        btnDelete.addEventListener('click', async (e) => {
+
+            const target = e.target.closest("figure");
+            const id = target.dataset.id;
+
+            const testDelete = await deleteWork(id)
+
+            document.querySelector("#figure-" + id).remove()
+            target.remove()
+
+            console.log(allWorks);
+            allWorks.forEach((workCu) => {
+
+                if (workCu.id == target.dataset.id) {
+                    console.log(workCu);
+                    allWorks.delete(workCu)
+                }
+
+            })
+            console.log(allWorks);
+            console.log(testDelete);
+
+            alert("travail correctement supprimé")
+        }
+        )
+    }
+}
+
+async function deleteWork(id) {
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${tokenId}`
+        },
+    })
+    if (response.status == 204) {
+
+        return response
+    } else {
+        alert("erreur pour supprimer un travail")
+    }
+}
+
+
+
+async function uploadFile() {
+
+
+    const formData = new FormData();
+    formData.append("file", file.files[0]);
+    await fetch('http://localhost:5678/api/works', {
+        method: "POST",
+        body: formData
+    });
+    alert('The file has been uploaded successfully.');
+}
+
+async function postWorkDatabase(data) {
+    const responseUpload = await fetch('http://localhost:5678/api/works', {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${tokenId}`
+        },
+
+        body: data,
+    });
+    if (responseUpload.ok) {
+        return responseUpload.json()
+    } else {
+        console.log(responseUpload);
+        return "error"
+    }
+}
+
+
+async function postWorks() {
+    const formData = new FormData();
+    const categoryWork = document.querySelector("#multiple-select").value
+    const titleWork = document.querySelector("#titre-ad").value
+
+    formData.append("image", image)
+    formData.append("title", titleWork)
+    formData.append("category", categoryWork)
+
+    console.log(categoryWork)
+    console.log(titleWork)
+    console.log(image)
+
+
+
+    responseUpload = await postWorkDatabase(formData)
+
+
+    if (titleWork !== "" && image !== "") {
+
+        allWorks.add(responseUpload)
+        genererWorks(allWorks)
+        genererWorksModal(allWorks)
+        alert("travail correctement ajouté")
+        closeModal("2")
+    }
+    else alert("erreur, veuillez remplir les champs nécessaires")
+}
+
+
+const openModal = async function (e) {
+    console.log(e);
+    e.preventDefault()
+
+    const target = e.target
+    const href = target.getAttribute("href")
+    console.log(target);
+    const modal = document.querySelector(href)
+
+
+    modal.style.display = "flex"
+    modal.removeAttribute('aria-hidden')
+    modal.setAttribute('aria-modal', 'true')
+    modal.addEventListener('click', closeModal)
+    console.log("ajout des listener");
+    const btnsModal = modal.querySelectorAll('.js-close-modal')
+    for (const btnModal of btnsModal) {
+        btnModal.addEventListener('click', closeModal)
+    }
+    modal.querySelector('.js-stop-modal').addEventListener('click', stopPropagation)
+
+
+}
+
+const closeModal = async function (info) {
+    let modalInfo
+    if (info instanceof Event) {
+        info.preventDefault()
+        const target = info.target
+
+        modalInfo = target.closest("aside")
+    } else {
+        modalInfo = document.querySelector("#modal"+info)
+    }
+
+    modalInfo.setAttribute('aria-hidden', 'true')
+    modalInfo.removeAttribute('aria-modal')
+    const hideModal = function () {
+        modalInfo.style.display = "none"
+        modalInfo.removeEventListener('animationend', hideModal)
+    }
+    modalInfo.addEventListener('animationend', hideModal)
+
+}
+
+
+const stopPropagation = function (e) {
+    e.stopPropagation()
+
+}
+
+document.querySelectorAll('.js-modal').forEach(a => {
+    a.addEventListener('click', openModal)
+
+})
+
+window.addEventListener('keydown', function (e) {
+    if (e.key === "Escape" || e.key === "Esc") {
+        closeModal(e)
+    }
+})

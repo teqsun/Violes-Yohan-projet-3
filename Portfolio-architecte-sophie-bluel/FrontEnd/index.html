@@ -1,125 +1,198 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/d442715d54.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
-	
+
 </head>
+
 <body>
-<header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li><a href="login.html">login</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"  class="formatInsta"></li>
-		</ul>
-	</nav>
-</header>
-<main>
-	<section id="introduction">
-		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-		</figure>
-		<article>
-			<h2>Designer d'espace</h2>
-			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
-		</article>
-	</section>
-	<section id="portfolio">
-		<h2>Mes Projets</h2>
-			<section class="filtres">
-				<button class="btn-tous">Tous</button>
-				<br>
-				<button class="btn-Objets">Objets</button>
-				<br>
-				<button class="btn-appartement">Appartements</button>
-				<br>
-				<button class="btn-hoteletrestaurants">Hôtels & restaurants</button>
-				<br>
-			</section>
-		<section class="gallery">
-			<!--<p><span id="title"></span></p>
-			
-			<p><span id="img"></span></p>-->
-			<!--<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
+	<header>
+		<div class="bloc-edition" >
+			<a href="#" class="modif-btn-edition">
+				<i class="fa-regular fa-pen-to-square icone-marg"></i>
+				Modifier</a>
+			<button class="btn-edition">publier les changements</button>
+		</div>
+		<div class="header-off">
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
+					<li>projets</li>
+					<li>contact</li>
+					<li class="log-in"><a href="login.html">login</a></li>
+					<li class="log-out" ><a href="index.html">logout</a></li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram" class="formatInsta"></li>
+				</ul>
+		</div>
+		</nav>
+	</header>
+	<main>
+		<section id="introduction">
+			<figure class="pic-profil-flex">
+				<img src="./assets/images/sophie-bluel.png" alt="">
+				<a href="#" class="modif-btn1" >
+					<i class="fa-regular fa-pen-to-square icone-marg"></i>
+					Modifier</a>
 			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption> 
-			</figure>-->
+			<article>
+				<a href="#" class="modif-btn2" >
+					<i class="fa-regular fa-pen-to-square icone-marg"></i>
+					Modifier</a>
+				<h2>Designer d'espace</h2>
+
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
+					finale du chantier.</p>
+				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+					décorateur(trice)</p>
+			</article>
 		</section>
-	</section>
-	<section id="contact">
-		<h2>Contact</h2>
-		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
-			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
-		</form>
-	</section>
-</main>
+		<section id="portfolio">
+			<section class="flex-align">
+				<h2>Mes Projets</h2>
+				<a href="#modal1" class="modif-btn js-modal" >
+					<i class="fa-regular fa-pen-to-square icone-marg"></i>
+					Modifier</a>
 
-<footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
-</footer>
+				<!--<div class="modif-btn">			
+			<a href="#modal1"></a><i class="fa-regular fa-pen-to-square icone-marg"></i></a>
+			<a href="#modal1"> Modifier</a> 
+		</div>-->
 
-<script type="module" src="works.js"></script>
+
+
+				<aside data-id="1" id="modal1" class="modal" aria-hidden="true" role="dialog"
+					aria-labelledby="titlemodal" >
+
+					<div class="modal-wrapper js-stop-modal flex-column">
+						<i class="fa-solid fa-x btn-close-modal js-close-modal"> </i>
+						<div class="flex-modal">
+							<!-- <button class="js-close-modal">fermer la modal</button> -->
+							<h2 class="titlemodal">Galerie photo</h2>
+							<section class="galerie-pictures">
+
+							</section>
+							<div class="flex-btn-galerie">
+								<button class="btn-ajouter-photo js-modal js-close-modal" href="#modal2">Ajouter une
+									photo</button>
+								<p class="btn-sup-gal">Supprimer la galerie</p>
+							</div>
+						</div>
+
+					</div>
+
+				</aside>
+
+				<aside data-id="2" id="modal2" class="modal" aria-hidden="true" role="dialog"
+					aria-labelledby="titlemodal" >
+
+					<div class="modal-wrapper2 js-stop-modal flex-column">
+						<div class="flex-modal-back">
+							<i href="#modal1" class="fa-solid fa-arrow-left-long js-modal js-close-modal"></i>
+							<i class="fa-solid fa-x btn-close-modal js-close-modal"> </i>
+						</div>
+						<div class="flex-modal">
+
+							<h2 class="titlemodal ">Ajout photo</h2>
+
+							<div class="bloc-add-pic ">
+								<img class="miniature-add-pic" id="miniature-add-pic" >
+								<i class="fa-solid fa-x delete-img" onclick="cleanPreview()"></i>
+								<div class="flex-bloc-pic">
+									<div class=""><i class="fa-regular fa-image size-pic-add"></i></div>
+
+									<input type="file" name="file" id="file" class="input-file" accept="image/png, image/jpeg"
+										onchange="previewImage();">
+									<label for="file">+ Ajouter photo</label>
+									<!--   <button class="btn-add-picture" >+ Ajouter photo</button> -->
+
+									<p>jpg, png : 4mo max</p>
+								</div>
+							</div>
+
+							<form class="form-add" action="#">
+								<h3 id="typoh3">Titre</h3>
+								<input type="text" name="titre-add" id="titre-ad">
+							
+
+							
+								<h3>Catégorie</h3>
+
+								
+									<select   id="multiple-select" >
+								
+											<option value="1">Objets</option>
+											<option value="2">Appartements</option>
+											<option value="3">Hôtels & restaurants</option>
+											
+
+
+									</select>
+									
+								
+								</form>
+								<div class="flex-btn-galerie">
+									
+									
+								
+								<button class="btn-valider-photo flex-btn-galerie" onclick="postWorks()">Valider</button>
+
+							</div>
+						
+						</div>
+
+					</div>
+
+				</aside>
+
+			</section>
+			<section class="filtres">
+				<button class="btn-filtres active" data-type="0">Tous</button>
+		
+			</section>
+			<section class="gallery">
+
+			</section>
+		</section>
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
+		</section>
+	</main>
+
+	<footer>
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
+
+
+	<script src="works.js"></script>
+	
+	<!--<script src="login.js"></script> -->
 </body>
+
 </html>

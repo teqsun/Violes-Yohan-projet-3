@@ -13,15 +13,22 @@
 </head>
 <body>
 <header>
+	
+	<header>
+		<div class="header-off">
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li><a href="index.html">projets</a></li>
 			<li>contact</li>
 			<li class="selectPage">login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"  class="formatInsta"></li>
+			<li><img src="./assets/icons/instagram.png" alt="Instagram" class="formatInsta"></li>
 		</ul>
 	</nav>
+</div>
+	
+		
+		
 </header>
 <main>
 	
@@ -30,14 +37,16 @@
 	<section id="login">
 		<h2>Log in</h2>
 		
-		<form action="#" method="post">
+		<form action="#" method="post" id="login-form">
 			
 			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
+			<input type="email" name="email" id="email" >
+
 			<label for="mot de passe">Mot de passe</label>
-			<input type="password" name="password" id="password">
-			<input type="submit" value="Se connecter">
+			<input type="password" name="password" id="password" >
 			
+			<button type="submit" class="btnCo" >Se connecter </button>
+			<!--onclick="validate()"  onclick={login}-->
 		</form>
 		<p>Mots de passe oublié</p>
 	</section>
@@ -50,7 +59,8 @@
 		</ul>
 	</nav>
 </footer>
-<script src="class Works"></script>
-<script src="works.js"></script>
+
+
+<script src="login.js"></script>
 </body>
 </html>
