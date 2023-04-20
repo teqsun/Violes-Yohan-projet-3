@@ -14,7 +14,7 @@ async function getAllWork() {
         return response.json()
         //sinon la console nous indique une autre réponse
     } else {
-        console.log(response);
+        //console.log(response);
     }
 }
 
@@ -66,7 +66,7 @@ async function getAllCategory() {
         return response.json()
         //sinon la console nous indique une autre réponse
     } else {
-        console.log(response);
+        //console.log(response);
     }
 }
 
@@ -105,7 +105,7 @@ async function filterBtn() {
 
         //on donne au bouton actif actuel un event sur le clique
         buttonFilter.addEventListener("click", function (e) {
-            console.log(allWorks);
+            
             //on crée la constante qui désigne le bouton cliqué
             const clickedBtn = e.target
             //on récupérer les Id communs affilié au bouton cliqué
@@ -251,7 +251,7 @@ async function previewImage() {
             const fileSize = fileCu[0].size / (1024 * 1024);
 
 
-            console.log(fileSize)
+           
             if (fileSize <= 4) {
                 image = fileCu[0]
                 document.getElementById("miniature-add-pic").setAttribute("src", event.target.result);
@@ -301,17 +301,16 @@ async function deleteWorks() {
             document.querySelector("#figure-" + id).remove()
             target.remove()
 
-            console.log(allWorks);
+          
             allWorks.forEach((workCu) => {
 
                 if (workCu.id == target.dataset.id) {
-                    console.log(workCu);
+                  
                     allWorks.delete(workCu)
                 }
 
             })
-            console.log(allWorks);
-            console.log(testDelete);
+         
 
             alert("travail correctement supprimé")
         }
@@ -375,10 +374,6 @@ async function postWorks() {
     formData.append("title", titleWork)
     formData.append("category", categoryWork)
 
-    console.log(categoryWork)
-    console.log(titleWork)
-    console.log(image)
-
 
 
     responseUpload = await postWorkDatabase(formData)
@@ -397,12 +392,12 @@ async function postWorks() {
 
 
 const openModal = async function (e) {
-    console.log(e);
+  
     e.preventDefault()
 
     const target = e.target
     const href = target.getAttribute("href")
-    console.log(target);
+    
     const modal = document.querySelector(href)
 
 
@@ -410,7 +405,7 @@ const openModal = async function (e) {
     modal.removeAttribute('aria-hidden')
     modal.setAttribute('aria-modal', 'true')
     modal.addEventListener('click', closeModal)
-    console.log("ajout des listener");
+    
     const btnsModal = modal.querySelectorAll('.js-close-modal')
     for (const btnModal of btnsModal) {
         btnModal.addEventListener('click', closeModal)
