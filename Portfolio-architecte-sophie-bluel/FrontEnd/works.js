@@ -447,8 +447,4 @@ document.querySelectorAll('.js-modal').forEach(a => {
 
 })
 
-window.addEventListener('keydown', function (e) {
-    if (e.key === "Escape" || e.key === "Esc") {
-        closeModal(e)
-    }
-})
+
