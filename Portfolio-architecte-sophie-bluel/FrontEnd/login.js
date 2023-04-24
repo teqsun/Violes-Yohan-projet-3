@@ -61,5 +61,5 @@
         })   
     })
 }
-// on appel la fonction pour la faire fonctionner 
+// on appel la fonction pour la lancer
 loginForm()

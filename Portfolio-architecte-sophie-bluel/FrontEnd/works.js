@@ -165,16 +165,16 @@ logOut.addEventListener('click', function () {
 
 async function genererWorksModal(worksModale) {
 
-    // on crée la zone d'apparitions dans la section gallery
+    // on crée la zone d'apparitions dans la section modal
     const sectionFichesMin = document.querySelector(".galerie-pictures");
     sectionFichesMin.innerHTML = ""
-    // on fragmente la formation du document dans la section gallery
+    // on fragmente la formation du document dans la section modal
     const fragment = document.createDocumentFragment()
-    //on créé la constante work des works pour ensuite l'appeler
+    //on créé la constante workmodale des works dans la modale pour ensuite l'appeler
     for (const workModale of worksModale) {
         //On nomme l'élément qui va recevoir les instructions des projets
         const worksElementMin = document.createElement("figure");
-        //on appel l'userId pour appliquer a chaque travaux leurs Id et donc les reconnaitres
+        //on appel l'Id pour appliquer a chaque travaux leurs Id et donc les reconnaitres
         worksElementMin.dataset.id = workModale.id;
         //on donne la forme des éléments créés
         worksElementMin.innerHTML = `<div  class="fig-size">
@@ -199,10 +199,6 @@ async function genererWorksModal(worksModale) {
 
     deleteWorks()
 }
-
-
-
-
 
 const activeBtnsPictures = document.querySelectorAll("figure");
 activeBtnsPictures.forEach(figure => {
@@ -240,7 +236,7 @@ function cleanPreview() {
     btnDeleteImg.style.display = "none"
 }
 
-// fonction pour inporter l'image du bouton add +
+// fonction pour importer l'image du bouton add +
 async function previewImage() {
     let fileCu = document.getElementById("file").files;
     if (fileCu.length > 0) {
@@ -391,6 +387,7 @@ async function postWorks() {
 }
 
 
+//fonctions modales 
 const openModal = async function (e) {
   
     e.preventDefault()
