@@ -1,9 +1,9 @@
 // création de la fonction login pour récupérer le token
  function loginForm(){
     //on appel la route pour aller sur l'api
-    const url = "http://localhost:5678/api/users/login";
+    let url = "http://localhost:5678/api/users/login";
     //on créé une constante qui appel la classe du formulaire de login
-    const form = document.getElementById("login-form")
+    let form = document.getElementById("login-form")
 
     //on ajoute un event sur le bouton submit
     form.addEventListener("submit", (e) => {

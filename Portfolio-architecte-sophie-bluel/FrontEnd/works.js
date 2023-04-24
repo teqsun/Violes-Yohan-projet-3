@@ -1,14 +1,12 @@
-
-
-const allWorks = new Set()
-const allCategory = new Set()
-let image = ""
+var allWorks = new Set()
+var allCategory = new Set()
+var image = ""
 
 
 // fonction qui permet de récupérer tous les projets sur l'api
 async function getAllWork() {
     // la reponse de l'api stock les données venant de l'api
-    const response = await fetch('http://localhost:5678/api/works');
+    let response = await fetch('http://localhost:5678/api/works');
     if (response.ok) {
         // si la réponse est bonne, les fichiers sont transformés au format json
         return response.json()
@@ -19,14 +17,14 @@ async function getAllWork() {
 }
 
 async function init() {
-    const works = await getAllWork()
-    for (const work of works) {
+    let works = await getAllWork()
+    for (let work of works) {
         allWorks.add(work)
     }
     genererWorks(allWorks)
     genererWorksModal(allWorks)
-    const cats = await getAllCategory()
-    for (const cat of cats) {
+    let cats = await getAllCategory()
+    for (let cat of cats) {
         allCategory.add(cat)
     }
     genererCategory(cats)
@@ -37,14 +35,14 @@ init()
 //on créé une une fonction asyncrone pour générer les projets actuels
 async function genererWorks(works) {
     // on crée la zone d'apparitions dans la section gallery
-    const sectionFiches = document.querySelector(".gallery");
+    let sectionFiches = document.querySelector(".gallery");
     sectionFiches.innerHTML = ""
     // on fragmente la formation du document dans la section gallery
-    const fragment = document.createDocumentFragment()
+    let fragment = document.createDocumentFragment()
     //on créé la constante work des works pour ensuite l'appeler
-    for (const work of works) {
+    for (let work of works) {
         //On nomme l'élément qui va recevoir les instructions des projets
-        const worksElement = document.createElement("figure");
+        let worksElement = document.createElement("figure");
         //on appel l'userId pour appliquer a chaque travaux leurs Id et donc les reconnaitres
         worksElement.id = "figure-" + work.id;
         //on donne la forme des éléments créés
@@ -60,7 +58,7 @@ async function genererWorks(works) {
 
 async function getAllCategory() {
     // la reponse de l'api stock les données venant de l'api
-    const response = await fetch('http://localhost:5678/api/categories');
+    let response = await fetch('http://localhost:5678/api/categories');
     if (response.ok) {
         // si la réponse est bonne, les fichiers sont transformés au format json
         return response.json()
@@ -73,13 +71,13 @@ async function getAllCategory() {
 //on créé une une fonction asyncrone pour générer les projets actuels
 async function genererCategory(categories) {
     // on crée la zone d'apparitions dans la section gallery
-    const sectionCategory = document.querySelector(".filtres");
+    let sectionCategory = document.querySelector(".filtres");
     // on fragmente la formation du document dans la section gallery
-    const fragment = document.createDocumentFragment()
+    let fragment = document.createDocumentFragment()
     //on créé la constante work des works pour ensuite l'appeler
-    for (const category of categories) {
+    for (let category of categories) {
         //On nomme l'élément qui va recevoir les instructions des projets
-        const worksCategory = document.createElement("div");
+        let worksCategory = document.createElement("div");
         //on appel l'userId pour appliquer a chaque travaux leurs Id et donc les reconnaitres
         worksCategory.dataset = category;
         //on donne la forme des éléments créés
@@ -98,25 +96,25 @@ async function genererCategory(categories) {
 //création de la fonction des boutons filtres
 async function filterBtn() {
     //on créé la constante pour pouvoir l'appeler, on désigne les boutons avec la meme classe
-    const buttonsFilter = document.querySelectorAll(".btn-filtres");
+    let buttonsFilter = document.querySelectorAll(".btn-filtres");
     //on récupere les données de la fonction getallworks pour récupérer les projets avant de continuer a éxécuter le code suivant
     //on ajoute une condition qui s'applique sur des boutons spécifiques
-    for (const buttonFilter of buttonsFilter) {
+    for (let buttonFilter of buttonsFilter) {
 
         //on donne au bouton actif actuel un event sur le clique
         buttonFilter.addEventListener("click", function (e) {
             
             //on crée la constante qui désigne le bouton cliqué
-            const clickedBtn = e.target
+            let clickedBtn = e.target
             //on récupérer les Id communs affilié au bouton cliqué
-            const type = parseInt(clickedBtn.dataset.type)
+            let type = parseInt(clickedBtn.dataset.type)
             //on indique que si aucun type de projet est selectionné, tous les projets apparaitronts
             if (type == 0) {
                 genererWorks(allWorks);
                 // on indique une condition si un type est actif
             } else {
                 //On applique un filtre sur les projets
-                const filtredWorks = [...allWorks].filter(function (works) {
+                let filtredWorks = [...allWorks].filter(function (works) {
                     //on demande de retourner les projets qui remplissent la condition du type demander
                     return works.category.id == type;
                 });
@@ -131,16 +129,16 @@ async function filterBtn() {
 }
 
 
-const tokenId = localStorage.getItem('token')
+var tokenId = localStorage.getItem('token')
 
 
-let filtresDisplay = document.querySelector(".filtres")
-let filtresDisplayLogIn = document.querySelector(".log-in")
-let filtresDisplayLogOut = document.querySelector(".log-out")
-let filtresDisplayModif = document.querySelector(".modif-btn")
-let filtresDisplayModif1 = document.querySelector(".modif-btn1")
-let filtresDisplayModif2 = document.querySelector(".modif-btn2")
-let filtresDisplayblocEdition = document.querySelector(".bloc-edition")
+var filtresDisplay = document.querySelector(".filtres")
+var filtresDisplayLogIn = document.querySelector(".log-in")
+var filtresDisplayLogOut = document.querySelector(".log-out")
+var filtresDisplayModif = document.querySelector(".modif-btn")
+var filtresDisplayModif1 = document.querySelector(".modif-btn1")
+var filtresDisplayModif2 = document.querySelector(".modif-btn2")
+var filtresDisplayblocEdition = document.querySelector(".bloc-edition")
 
 
 
@@ -156,7 +154,7 @@ if (tokenId !== null) {
     filtresDisplayblocEdition.style.display = "flex";
 }
 
-const logOut = document.querySelector(".log-out")
+var logOut = document.querySelector(".log-out")
 logOut.addEventListener('click', function () {
 
     localStorage.removeItem('token')
@@ -166,14 +164,14 @@ logOut.addEventListener('click', function () {
 async function genererWorksModal(worksModale) {
 
     // on crée la zone d'apparitions dans la section modal
-    const sectionFichesMin = document.querySelector(".galerie-pictures");
+    let sectionFichesMin = document.querySelector(".galerie-pictures");
     sectionFichesMin.innerHTML = ""
     // on fragmente la formation du document dans la section modal
-    const fragment = document.createDocumentFragment()
+    let fragment = document.createDocumentFragment()
     //on créé la constante workmodale des works dans la modale pour ensuite l'appeler
-    for (const workModale of worksModale) {
+    for (let workModale of worksModale) {
         //On nomme l'élément qui va recevoir les instructions des projets
-        const worksElementMin = document.createElement("figure");
+        let worksElementMin = document.createElement("figure");
         //on appel l'Id pour appliquer a chaque travaux leurs Id et donc les reconnaitres
         worksElementMin.dataset.id = workModale.id;
         //on donne la forme des éléments créés
@@ -200,7 +198,7 @@ async function genererWorksModal(worksModale) {
     deleteWorks()
 }
 
-const activeBtnsPictures = document.querySelectorAll("figure");
+var activeBtnsPictures = document.querySelectorAll("figure");
 activeBtnsPictures.forEach(figure => {
 
     figure.addEventListener("click", function () {
@@ -222,11 +220,11 @@ function cleanPreview() {
     image = ""
     document.getElementById("file").value = "";
 
-    const removeCuImg = document.querySelector(".miniature-add-pic")
-    const btnDeleteImg = document.querySelector(".delete-img")
-    const previewMin = document.querySelector(".miniature-add-pic")
-    const blocDisplay = document.querySelector(".flex-bloc-pic")
-    const btnValider = document.querySelector(".btn-valider-photo")
+    let removeCuImg = document.querySelector(".miniature-add-pic")
+    let btnDeleteImg = document.querySelector(".delete-img")
+    let previewMin = document.querySelector(".miniature-add-pic")
+    let blocDisplay = document.querySelector(".flex-bloc-pic")
+    let btnValider = document.querySelector(".btn-valider-photo")
 
 
     removeCuImg.src = "";
@@ -244,7 +242,7 @@ async function previewImage() {
         fileCuReader.onload = function (event) {
 
 
-            const fileSize = fileCu[0].size / (1024 * 1024);
+            let fileSize = fileCu[0].size / (1024 * 1024);
 
 
            
@@ -266,10 +264,10 @@ async function previewImage() {
 
 
 function updatePreview() {
-    const previewMin = document.querySelector(".miniature-add-pic")
-    const blocDisplay = document.querySelector(".flex-bloc-pic")
-    const btnValider = document.querySelector(".btn-valider-photo")
-    const btnDeleteImg = document.querySelector(".delete-img")
+    let previewMin = document.querySelector(".miniature-add-pic")
+    let blocDisplay = document.querySelector(".flex-bloc-pic")
+    let btnValider = document.querySelector(".btn-valider-photo")
+    let btnDeleteImg = document.querySelector(".delete-img")
     if (previewMin.src != "") {
         previewMin.style.display = "block";
         blocDisplay.style.display = "none";
@@ -286,13 +284,13 @@ async function deleteWorks() {
     // DELETE request using fetch with async/await
     let btnsDelete = document.querySelectorAll(".delete-btn")
 
-    for (const btnDelete of btnsDelete) {
+    for (let btnDelete of btnsDelete) {
         btnDelete.addEventListener('click', async (e) => {
 
-            const target = e.target.closest("figure");
-            const id = target.dataset.id;
+            let target = e.target.closest("figure");
+            let id = target.dataset.id;
 
-            const testDelete = await deleteWork(id)
+            let testDelete = await deleteWork(id)
 
             document.querySelector("#figure-" + id).remove()
             target.remove()
@@ -315,7 +313,7 @@ async function deleteWorks() {
 }
 
 async function deleteWork(id) {
-    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+    let response = await fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
         headers: {
             Authorization: `Bearer ${tokenId}`
@@ -334,7 +332,7 @@ async function deleteWork(id) {
 async function uploadFile() {
 
 
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("file", file.files[0]);
     await fetch('http://localhost:5678/api/works', {
         method: "POST",
@@ -344,7 +342,7 @@ async function uploadFile() {
 }
 
 async function postWorkDatabase(data) {
-    const responseUpload = await fetch('http://localhost:5678/api/works', {
+    let responseUpload = await fetch('http://localhost:5678/api/works', {
         method: "POST",
         headers: {
             Authorization: `Bearer ${tokenId}`
@@ -362,9 +360,9 @@ async function postWorkDatabase(data) {
 
 
 async function postWorks() {
-    const formData = new FormData();
-    const categoryWork = document.querySelector("#multiple-select").value
-    const titleWork = document.querySelector("#titre-ad").value
+    let formData = new FormData();
+    let categoryWork = document.querySelector("#multiple-select").value
+    let titleWork = document.querySelector("#titre-ad").value
 
     formData.append("image", image)
     formData.append("title", titleWork)
@@ -388,14 +386,14 @@ async function postWorks() {
 
 
 //fonctions modales 
-const openModal = async function (e) {
+var openModal = async function (e) {
   
     e.preventDefault()
 
-    const target = e.target
-    const href = target.getAttribute("href")
+    let target = e.target
+    let href = target.getAttribute("href")
     
-    const modal = document.querySelector(href)
+    let modal = document.querySelector(href)
 
 
     modal.style.display = "flex"
@@ -403,8 +401,8 @@ const openModal = async function (e) {
     modal.setAttribute('aria-modal', 'true')
     modal.addEventListener('click', closeModal)
     
-    const btnsModal = modal.querySelectorAll('.js-close-modal')
-    for (const btnModal of btnsModal) {
+    let btnsModal = modal.querySelectorAll('.js-close-modal')
+    for (let btnModal of btnsModal) {
         btnModal.addEventListener('click', closeModal)
     }
     modal.querySelector('.js-stop-modal').addEventListener('click', stopPropagation)
@@ -412,11 +410,11 @@ const openModal = async function (e) {
 
 }
 
-const closeModal = async function (info) {
+var closeModal = async function (info) {
     let modalInfo
     if (info instanceof Event) {
         info.preventDefault()
-        const target = info.target
+        let target = info.target
 
         modalInfo = target.closest("aside")
     } else {
@@ -425,7 +423,7 @@ const closeModal = async function (info) {
 
     modalInfo.setAttribute('aria-hidden', 'true')
     modalInfo.removeAttribute('aria-modal')
-    const hideModal = function () {
+    let hideModal = function () {
         modalInfo.style.display = "none"
         modalInfo.removeEventListener('animationend', hideModal)
     }
@@ -434,7 +432,7 @@ const closeModal = async function (info) {
 }
 
 
-const stopPropagation = function (e) {
+var stopPropagation = function (e) {
     e.stopPropagation()
 
 }
